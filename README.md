@@ -1,0 +1,1 @@
+# wp-bsc-vedbo-child-theme-v1
