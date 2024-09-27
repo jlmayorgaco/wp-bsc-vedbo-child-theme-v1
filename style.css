@@ -11,6 +11,65 @@ Version: 1.0
 /****************************************************************/
 /*************** ADD YOUR CUSTOM CSS IN THIS AREA ***************/
 /****************************************************************/
+:root{
+    --color--blue: #c2e9f3;
+    --color--pink: #f7c0cd;
+}
+
+
+
+body.woocommerce-checkout{
+    background-color: white !important;
+}
+
+.bsc__woofc-area-heading{
+    text-transform: none;
+    color: black;
+    font-weight: 100;
+}
+
+.bsc__woofc-area-heading strong{
+    font-weight: bold;
+} 
+
+.woofc-area-top{
+    box-sizing: content-box;
+    border: 3px solid black;
+    background-color: white !important;
+}
+
+.woofc-icon-icon10{
+    color: black;
+}
+
+
+.bsc__checkout{
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+.elementor-element.elementor-element-7d7006c.elementor-widget.elementor-widget-image,
+.elementor-element.elementor-element-839b6e0.elementor-widget.elementor-widget-heading,
+.elementor-element.elementor-element-6aa8ae8.elementor-widget.elementor-widget-image
+{
+    display: none !important;
+}
+.woocommerce-notices-wrapper, .woocommerce-form-coupon-toggle{
+    /*display: none !important;*/
+}
+
+.bsc__checkout__header{
+    width: 100%;
+    margin: 0 auto;
+}
+.bsc__checkout__header img{
+    width: 250px;
+    display: block;
+    margin: 0 auto;
+    padding: 2em;
+    box-sizing: content-box;
+    padding-top: 0px;
+}
 
 
 
@@ -18,6 +77,210 @@ Version: 1.0
 
 
 
+.bsc__checkout .checkout__title{
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.bsc__checkout  .checkout__link{
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-transform: lowercase;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+}
+
+
+.bsc__checkout  .checkout__contact{
+    display: block;
+    width: 100%;
+}
+
+.bsc__checkout  .contact__head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.bsc__checkout .contact__footer{
+    display: flex;
+    flex-direction: row;
+    justify-content:  flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.bsc__checkout .contact__form{
+    display: block;
+    width: 100%;
+}
+
+.bsc__checkout .form__field{
+    display: block;
+    width: 100%;
+}
+.bsc__checkout .form__field{
+    display: block;
+    width: 100%;
+}
+.bsc__checkout .field__email{
+    display: block;
+    width: 100%;
+}
+.bsc__checkout .field__email:focus{
+    border-width: 2px;
+    border-color: var(--color--blue) !important;
+}
+.bsc__checkout .field__notify{
+    accent-color:var(--color--pink) !important;
+}
+
+.bsc__field--no-label label{
+    display: none;
+}
+
+.bsc__field--no-label{
+    position: relative;
+}
+.bsc__field--no-label label[for="billing_country"],
+.bsc__field--no-label label[for="billing_state"],
+.bsc__field--no-label label[for="billing_city"]{
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    font-size: 10px;
+}
+
+.bsc__field--billing_country .woocommerce-input-wrapper{
+    display: block;
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    border: 1px solid #D1D1D6;
+    border-color: #D1D1D6;
+    border-radius: var(--site-field-radius);
+}
+
+.form__fields {
+
+    --var-form-gap: 10px;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: var(--var-form-gap);
+    
+}
+.form__fields p.form-row{
+    margin-bottom: 0*var(--var-form-gap) !important;
+}
+.form__fields .bsc__field--billing_first_name{
+    display: block;
+    width: calc(50% - 0.5*var(--var-form-gap));
+    order: 1;
+}
+.form__fields .bsc__field--billing_last_name{
+    display: block;
+    width: calc(50% - 0.5*var(--var-form-gap));
+    order: 2; 
+}
+.form__fields .bsc__field--billing_cc{
+    display: block;
+    width: 100%;
+    order: 3; 
+}
+.form__fields .bsc__field--billing_email{
+    display: block;
+    width: 100%;
+    order: 4; 
+}
+.form__fields .bsc__field--billing_phone{
+    display: block;
+    width: 100%;
+    order: 5; 
+}
+.form__fields .bsc__field--billing_country{
+    display: block;
+    width: 100%;
+    order: 6; 
+}
+.form__fields .bsc__field--billing_state{
+    display: block;
+    width: calc(33.333333% - 2*0.353333*var(--var-form-gap));
+    order: 7; 
+}
+.form__fields .bsc__field--billing_city{
+    display: block;
+    width: calc(33.333333% - 2*0.353333*var(--var-form-gap));
+    order: 8; 
+}
+.form__fields .bsc__field--billing_postcode{
+    display: block;
+    width: calc(33.333333% - 2*0.353333*var(--var-form-gap));
+    order: 9; 
+}
+.form__fields .bsc__field--billing_address_1{
+    display: block;
+    width: 100%;
+    order: 10; 
+}
+.form__fields .bsc__field--billing_address_2{
+    display: block;
+    width: 100%;
+    order: 11; 
+}
+
+
+
+[type='text']:focus, [type='password']:focus, [type='date']:focus, [type='datetime']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='week']:focus, [type='email']:focus, [type='number']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='url']:focus, [type='color']:focus, textarea:focus {
+    background-color: transparent;
+    border-width: 2px;
+    border-color: var(--color--blue);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea {
+    border-color: #D1D1D6;
+    border-radius: 0px;
+    border-width: 2px;
+}
+
+.woocommerce-validated input {
+    border-top-color: black !important;
+    border-left-color: black !important;
+    border-right-color: black !important;
+    border-bottom-color: black !important;
+}
 /****************************************************************/
 /****************************************************************/
 /****************************************************************/
+
+
+
+.bsc__billing {
+    display: flex;
+    gap: 20px;
+}
+
+.billing__first-name, .billing__last-name {
+    flex: 1;
+}
+
+.form-row {
+    width: 100%; /* Ensure full width of each column */
+}
+
+h1 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
