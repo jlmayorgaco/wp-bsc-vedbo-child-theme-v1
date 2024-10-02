@@ -55,7 +55,7 @@ body.woocommerce-checkout{
     display: none !important;
 }
 .woocommerce-notices-wrapper, .woocommerce-form-coupon-toggle{
-    /*display: none !important;*/
+    display: none !important;
 }
 
 .bsc__checkout__header{
@@ -157,7 +157,7 @@ body.woocommerce-checkout{
     left: 5px;
     font-size: 10px;
 }
-
+.bsc__field--shipping_country .woocommerce-input-wrapper,
 .bsc__field--billing_country .woocommerce-input-wrapper{
     display: block;
     width: 100%;
@@ -165,10 +165,18 @@ body.woocommerce-checkout{
     line-height: 3rem;
     padding: 0 0.75rem;
     font-size: 0.875rem;
-    border: 1px solid #D1D1D6;
+    border: 2px solid #D1D1D6;
     border-color: #D1D1D6;
-    border-radius: var(--site-field-radius);
+    border-radius: 0px;
 }
+.bsc__field--billing_state{
+    border-radius: 0px;
+    border: 1px solid #D1D1D6; 
+}
+.bsc__field--billing_city select{
+    border-radius: 0px;
+    border: 2px solid #D1D1D6;
+} 
 
 .form__fields {
 
@@ -241,6 +249,39 @@ body.woocommerce-checkout{
 }
 
 
+.form__fields .bsc__field--shipping_country{
+    display: block;
+    width: 100%;
+    order: 1; 
+}
+
+.form__fields .bsc__field--shipping_state{
+    display: block;
+    width: calc(33.333333% - 2*0.353333*var(--var-form-gap));
+    order: 2; 
+}
+.form__fields .bsc__field--shipping_city{
+    display: block;
+    width: calc(33.333333% - 2*0.353333*var(--var-form-gap));
+    order: 3; 
+}
+.form__fields .bsc__field--shipping_postcode{
+    display: block;
+    width: calc(33.333333% - 2*0.353333*var(--var-form-gap));
+    order: 4; 
+}
+.form__fields .bsc__field--shipping_address_1{
+    display: block;
+    width: 100%;
+    order: 5; 
+}
+
+.form__fields .bsc__field--shipping_address_2{
+    display: block;
+    width: 100%;
+    order: 6; 
+}
+
 
 [type='text']:focus, [type='password']:focus, [type='date']:focus, [type='datetime']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='week']:focus, [type='email']:focus, [type='number']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='url']:focus, [type='color']:focus, textarea:focus {
     background-color: transparent;
@@ -255,11 +296,21 @@ body.woocommerce-checkout{
     border-width: 2px;
 }
 
+.bsc__field--billing_country input{
+
+}
+
 .woocommerce-validated input {
     border-top-color: black !important;
     border-left-color: black !important;
     border-right-color: black !important;
     border-bottom-color: black !important;
+}
+
+
+#ship-to-different-address{
+    margin-top: 1em !important;
+    margin-bottom: 1em; !important;
 }
 /****************************************************************/
 /****************************************************************/
