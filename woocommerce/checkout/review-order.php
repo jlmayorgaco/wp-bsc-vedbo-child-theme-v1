@@ -1,110 +1,149 @@
 <?php
 /**
  * Review order table
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/review-order.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
  * @version 5.2.0
  */
 
 defined( 'ABSPATH' ) || exit;
+
+/**
+ * Get filtered product categories based on the parent category slug.
+ *
+ * @param int    $product_id The ID of the product.
+ * @param array  $parent_slugs The slugs of the parent categories to filter by.
+ * @return array Filtered category names.
+ */
+function get_filtered_product_categories( $product_id, $parent_slugs = ['sk-marcas', 'hc-marca', 'mk-marcas'] ) {
+    // Get all the categories
+    $product_categories = get_the_terms( $product_id, 'product_cat' );
+    $filtered_categories = [];
+
+    // Loop through the categories and filter based on parent slug
+    if ( ! is_wp_error( $product_categories ) && $product_categories ) {
+        foreach ( $product_categories as $category ) {
+            // Get the parent category term
+            $parent_category = get_term( $category->parent, 'product_cat' );
+            
+            // Check if the parent category's slug matches one of the target slugs
+            if ( $parent_category && in_array( $parent_category->slug, $parent_slugs ) ) {
+                // Add this category to the filtered categories
+                $filtered_categories[] = $category->name;
+            }
+        }
+    }
+
+    return $filtered_categories; // Return an array of filtered category names
+}
+
 ?>
-<table class="shop_table woocommerce-checkout-review-order-table">
-	<thead>
-		<tr>
-			<th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-			<th class="product-total"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
-		</tr>
-	</thead>
-	<tbody>
-		<?php
-		do_action( 'woocommerce_review_order_before_cart_contents' );
+<div class="bsc__checkout--review" >
 
-		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
-			$_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+	<div class="review__container"> 
+		<ul class="review__items">
+			<?php
 
-			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
+			$n_size = 0;
+			$cart_subtotal = 0; // Initialize subtotal
+
+			foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {	
+				$_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+				
+				$productId = $_product->get_id();
+				$productBrandCategories = get_filtered_product_categories( $productId );
+
+				$productImage = $_product->get_image();
+				$productName = $_product->get_name();
+				$productBrand = $productBrandCategories ? $productBrandCategories[0] : 'Unknown Brand';
+				$productPrice = wc_price($_product->get_price()); // Get formatted price
+				$productQuantity = $cart_item['quantity'];
+				$productTotal = wc_price($_product->get_price() * $productQuantity); // Calculate total price for the product
+
+				// Add product quantity to overall cart size
+				$n_size += $productQuantity;
+
+				// Add to subtotal
+				$cart_subtotal += $_product->get_price() * $productQuantity;
 				?>
-				<tr class="<?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
-					<td class="product-name">
-						<?php echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) ) . '&nbsp;'; ?>
-						<?php echo apply_filters( 'woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $cart_item['quantity'] ) . '</strong>', $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						<?php echo wc_get_formatted_cart_item_data( $cart_item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</td>
-					<td class="product-total">
-						<?php echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-					</td>
-				</tr>
-				<?php
+					<li class="review__item">
+						<div class="item__col col1">
+							<div class="item__picture">
+								<?php echo $productImage; ?>
+								<label>
+									<span> <?php echo $productQuantity; ?></span>
+								</label>
+							</div>
+						</div>
+						<div class="item__col col2">
+							<div class="row">
+								<div class="col_name_brand">
+									<h5 class="item__name"><?php echo $productName; ?></h5>
+									<h5 class="item__brand"><?php echo $productBrand; ?></h5>
+								</div>
+								<div class="col_total">
+									<h5 class="item__total"><?php echo $productTotal; ?></h5>
+								</div>
+							</div>
+							<div class="row">
+								<h5 class="item__price"><?php echo $productPrice; ?></h5>
+							</div>
+						</div>
+					</li>
+				<?php 
 			}
-		}
+			?>
+		</ul> 	
+		<div class="review__coupon">
+			<div class="coupon__container">
+				<div class="coupon__field">
+					<input id="coupon_code"  type="text" name="coupon_code" class="input-text" placeholder=" " />
+            		<label id="coupon_label" for="coupon_code">¿Tienes un código de <strong>descuento</strong>?</label>
+        		</div>
+				<div class="coupon__row">
+					<div class="coupon__col">
+						<p class="coupon__message"> ¡Muestras <strong>gratis</strong> con todos tus pedidos en BSC! <img src=""> <img src=""> <img src=""> </p>
+					</div>
+					<div class="coupon__col">
+						<button class="coupon__button" id="apply_coupon">¡Aplicar!</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
-		do_action( 'woocommerce_review_order_after_cart_contents' );
-		?>
-	</tbody>
-	<tfoot>
+		<br>
+		<hr>
+		<br>
 
-		<tr class="cart-subtotal">
-			<th><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
-			<td><?php wc_cart_totals_subtotal_html(); ?></td>
-		</tr>
+		<div class="review__summary">
+			<div class="summary__row">
+				<div class="summary_col col1">Subtotal (<?php echo $n_size; ?> items)</div>
+				<div class="summary_col col2"><?php echo wc_price($cart_subtotal); ?></div>
+			</div>
+			<div class="summary__row">
+				<div class="summary_col col1">Envío</div>
+				<div class="summary_col col2"><?php echo WC()->cart->get_cart_shipping_total(); ?></div>
+			</div>
+			<div class="summary__row">
+				<div class="summary_col col1"> <strong> Total </strong> </div>
+				<div class="summary_col col2">
+					<strong>
+						<?php 
+							$cart_total = $cart_subtotal + WC()->cart->get_shipping_total(); 
+							echo wc_price($cart_total);
+						?>
+					</strong>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-		<?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
-			<tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-				<th><?php wc_cart_totals_coupon_label( $coupon ); ?></th>
-				<td><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
-			</tr>
-		<?php endforeach; ?>
+<script>
+document.getElementById('apply_coupon').addEventListener('click', function() {
+    // WooCommerce applies coupons via AJAX, trigger the click event on WooCommerce's apply coupon button.
+    jQuery('form.woocommerce-checkout').find('button[name="apply_coupon"]').click();
+});
+</script>
 
-		<?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
 
-			<?php do_action( 'woocommerce_review_order_before_shipping' ); ?>
 
-			<?php wc_cart_totals_shipping_html(); ?>
-
-			<?php do_action( 'woocommerce_review_order_after_shipping' ); ?>
-
-		<?php endif; ?>
-
-		<?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
-			<tr class="fee">
-				<th><?php echo esc_html( $fee->name ); ?></th>
-				<td><?php wc_cart_totals_fee_html( $fee ); ?></td>
-			</tr>
-		<?php endforeach; ?>
-
-		<?php if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() ) : ?>
-			<?php if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) : ?>
-				<?php foreach ( WC()->cart->get_tax_totals() as $code => $tax ) : // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited ?>
-					<tr class="tax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
-						<th><?php echo esc_html( $tax->label ); ?></th>
-						<td><?php echo wp_kses_post( $tax->formatted_amount ); ?></td>
-					</tr>
-				<?php endforeach; ?>
-			<?php else : ?>
-				<tr class="tax-total">
-					<th><?php echo esc_html( WC()->countries->tax_or_vat() ); ?></th>
-					<td><?php wc_cart_totals_taxes_total_html(); ?></td>
-				</tr>
-			<?php endif; ?>
-		<?php endif; ?>
-
-		<?php do_action( 'woocommerce_review_order_before_order_total' ); ?>
-
-		<tr class="order-total">
-			<th><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
-			<td><?php wc_cart_totals_order_total_html(); ?></td>
-		</tr>
-
-		<?php do_action( 'woocommerce_review_order_after_order_total' ); ?>
-
-	</tfoot>
-</table>

@@ -14,6 +14,9 @@ Version: 1.0
 :root{
     --color--blue: #c2e9f3;
     --color--pink: #f7c0cd;
+    --color--black: #333333;
+
+
 }
 
 
@@ -310,8 +313,285 @@ body.woocommerce-checkout{
 
 #ship-to-different-address{
     margin-top: 1em !important;
-    margin-bottom: 1em; !important;
+    margin-bottom: 1em !important;
 }
+
+
+
+
+
+
+/* ----------------------------------------------------- */
+/* --- Checkout Review --------------------------------- */
+/* ----------------------------------------------------- */
+
+/* ----------------------------------------------------- */
+
+.bsc__checkout--review {
+    display: block;
+    width: 100%;
+    background-color: var(--color--pink);
+
+    --checkout--review--img-w: 80px;
+    --checkout--review--img-h: 100px;
+}
+
+.review__container{
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    padding-top: 2em;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+.review__items{
+    display: flex;
+    flex-direction: column;
+    margin-left: 0px;
+}
+.review__item{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: start;
+    align-items:  start;
+
+    margin-bottom: 30px;
+}
+
+.item__col{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+.item__col .row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+}
+.item__col.col1{
+    width: var(--checkout--review--img-w);
+}
+.item__col.col2{
+    height: var(--checkout--review--img-h);
+    width: calc(100% - var(--checkout--review--img-w) - 20px);
+    padding-left: 0px;
+    padding-bottom: 0px;
+    margin-left: 20px;
+    border-bottom: 1px solid var(--color--black);
+}
+.item__col.col2 .row:first-child{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.col_name_brand{
+
+}
+.col_total{}
+
+.item__picture {
+    display: block;
+    position: relative;
+    width: var(--checkout--review--img-w);
+    height: var(--checkout--review--img-h);
+
+    --checkout--review--label-w : 30px;
+    --checkout--review--label-h : 30px;
+}
+.item__picture img { 
+    display: block;
+    position: relative;
+    width: var(--checkout--review--img-w);
+    height: var(--checkout--review--img-h);
+    border: 2px solid var(--color--black);
+}
+.item__picture label { 
+    position: absolute;
+    padding: 0px;
+
+    top: calc(-1 * 0.5*var(--checkout--review--label-h));
+    right: calc(-1 * 0.5*var(--checkout--review--label-w));
+    width: var(--checkout--review--label-w);
+    height: var(--checkout--review--label-h);
+    background-color: white;
+    border: 2px solid var(--color--black);
+    border-radius: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item__picture span { 
+
+    color: var(--color--black);
+    font-weight: 600;
+    font-size: 14px;
+}
+.item__name{
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0px;
+    padding: 0px;
+}
+.item__brand{
+    font-size: 14px;
+    font-weight: 900;
+    margin: 0px;
+    padding: 0px;
+}
+.item__total{
+    font-size: 14px;
+    font-weight: 900;
+    margin: 0px;
+    padding: 0px;
+}
+.item__price{
+    font-size: 14px;
+    font-weight: 900;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* ----------------------------------------------------- */
+/* --- Checkout Coupon --------------------------------- */
+/* ----------------------------------------------------- */
+
+.review__coupon {
+    display: block;
+    width: 100%;
+}
+.review__coupon .coupon__container {
+    display: block;
+    width: 100%;
+    padding: 0px;
+}
+.review__coupon .coupon__field {
+    display: block;
+    width: 100%;
+    padding: 0em 1em;
+    position: relative;
+    background-color: white;
+    border: 2px solid var(--color--black);
+
+}
+.review__coupon .coupon__field label{
+    display: block;
+    width: fit-content;
+    position: absolute;
+    top: 10px;
+    left: 16px;
+
+}
+.review__coupon .coupon__field input{
+    display: block;
+    width: 100%;
+    position: relative;
+
+    background: none;
+    border: none;
+    outline: none;
+
+    margin: 0px;
+    padding: 0px;
+ 
+}
+
+
+/* Hide the label when the input has text (input is not empty) */
+.review__coupon .coupon__field input:not(:placeholder-shown) + label {
+    opacity: 0;
+    pointer-events: none; /* Prevent interaction with the label */
+}
+
+/* When the input is focused, hide the label */
+.review__coupon .coupon__field input:focus + label {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Coupon row, column, message, and button */
+.review__coupon .coupon__row {
+    display: flex;
+    justify-content: space-between;
+}
+.review__coupon .coupon__col {
+    flex: 1;
+    padding: 0.5em;
+}
+.review__coupon .coupon__col:first-child {
+
+}
+.review__coupon .coupon__message {
+    font-size: 0.9em;
+    color: #333;
+}
+.review__coupon .coupon__button {
+    background-color: var(--color--black);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.review__coupon .coupon__button:hover {
+    background-color: var(--color--primary);
+}
+
+.review__summary{}
+.review__summary .summary__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.review__summary .summary_col{
+    width: 50%;
+    display: flex;
+    flex-direction: col;
+}
+.review__summary .summary_col strong {
+    font-weight: 900;
+    font-size: 20px;
+}
+.review__summary .summary_col.col1{
+    display: flex;
+    justify-content:flex-start;
+    align-items: center
+}
+.review__summary .summary_col.col2{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+
+.woocommerce-checkout-payment{
+    background-color: var(--color--pink);
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5em;
+    padding-top: 2em;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.bsc__woocommerce_order_button_html{
+    display: block;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.bsc__woocommerce_order_button_html button{
+    padding: 1.25rem 2.25rem !important;
+}
+
 /****************************************************************/
 /****************************************************************/
 /****************************************************************/
