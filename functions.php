@@ -1,5 +1,28 @@
 <?php //Start building your awesome child theme functions
 
+
+function custom_coming_soon_redirect() {
+    // Check if the user is an admin or if the current page is wp-admin.
+    if (is_user_logged_in() && current_user_can('administrator')) {
+        return; // Let admins access the dashboard.
+    }
+
+    // Allow access to wp-login.php and wp-admin URLs.
+    $request_uri = $_SERVER['REQUEST_URI'];
+    if (strpos($request_uri, 'wp-admin') !== false || strpos($request_uri, 'wp-login.php') !== false) {
+        return;
+    }
+
+    // Redirect other users to the coming-soon page.
+    $coming_soon_path = get_stylesheet_directory() . '/coming-soon.php';
+    if (file_exists($coming_soon_path)) {
+        include($coming_soon_path);
+        exit;
+    }
+}
+add_action('template_redirect', 'custom_coming_soon_redirect');
+
+
 add_action( 'wp_enqueue_scripts', 'vedbo_enqueue_styles', 100 );
 function vedbo_enqueue_styles() {
     wp_enqueue_style( 'vedbo-child-styles',  get_stylesheet_directory_uri() . '/style.css', array( 'nova-vedbo-styles' ), wp_get_theme()->get('Version') );
