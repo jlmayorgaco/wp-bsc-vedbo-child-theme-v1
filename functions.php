@@ -83,3 +83,26 @@ function clone_shipping_to_billing_fields( $fields ) {
 
     return $fields;
 }
+
+
+// Enqueue CSS and JS for the header
+add_action('wp_enqueue_scripts', 'vedbo_child_enqueue_assets');
+
+function vedbo_child_enqueue_assets() {
+    // Load the header CSS
+    wp_enqueue_style(
+        'vedbo-child-header-css',
+        get_stylesheet_directory_uri() . '/components/header/header.css',
+        array(),
+        '1.0.0'
+    );
+
+    // Load the header JS
+    wp_enqueue_script(
+        'vedbo-child-header-js',
+        get_stylesheet_directory_uri() . '/components/header/header.js',
+        array('jquery'),
+        '1.0.0',
+        true // Load in the footer
+    );
+}
