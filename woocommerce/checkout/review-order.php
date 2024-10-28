@@ -26,7 +26,7 @@ function get_filtered_product_categories( $product_id, $parent_slugs = ['sk-marc
             $parent_category = get_term( $category->parent, 'product_cat' );
             
             // Check if the parent category's slug matches one of the target slugs
-            if ( $parent_category && in_array( $parent_category->slug, $parent_slugs ) ) {
+            if ( $parent_category && !is_wp_error($parent_category) && in_array( $parent_category->slug, $parent_slugs ) ) {
                 // Add this category to the filtered categories
                 $filtered_categories[] = $category->name;
             }
@@ -84,7 +84,7 @@ function get_filtered_product_categories( $product_id, $parent_slugs = ['sk-marc
 									<h5 class="item__total"><?php echo $productTotal; ?></h5>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" style="display:none">
 								<h5 class="item__price"><?php echo $productPrice; ?></h5>
 							</div>
 						</div>
