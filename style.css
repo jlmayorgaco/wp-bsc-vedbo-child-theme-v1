@@ -390,7 +390,8 @@ body.woocommerce-checkout{
     justify-content: space-between;
 }
 .col_name_brand{
-
+    width: 100%;
+    max-width: calc(100% - 5em);
 }
 .col_total{}
 
@@ -433,6 +434,8 @@ body.woocommerce-checkout{
     font-size: 14px;
 }
 .item__name{
+    width: 100%;
+    max-width: calc(100% - 2em);
     font-size: 14px;
     font-weight: 300;
     margin: 0px;
@@ -516,12 +519,16 @@ body.woocommerce-checkout{
 
 /* Coupon row, column, message, and button */
 .review__coupon .coupon__row {
-    display: flex;
+    /*display: flex;
     justify-content: space-between;
+    */
 }
 .review__coupon .coupon__col {
     flex: 1;
     padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 .review__coupon .coupon__col:first-child {
 
