@@ -7,34 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-/**
- * Get filtered product categories based on the parent category slug.
- *
- * @param int    $product_id The ID of the product.
- * @param array  $parent_slugs The slugs of the parent categories to filter by.
- * @return array Filtered category names.
- */
-function get_filtered_product_categories( $product_id, $parent_slugs = ['sk-marcas', 'hc-marca', 'mk-marcas'] ) {
-    // Get all the categories
-    $product_categories = get_the_terms( $product_id, 'product_cat' );
-    $filtered_categories = [];
 
-    // Loop through the categories and filter based on parent slug
-    if ( ! is_wp_error( $product_categories ) && $product_categories ) {
-        foreach ( $product_categories as $category ) {
-            // Get the parent category term
-            $parent_category = get_term( $category->parent, 'product_cat' );
-            
-            // Check if the parent category's slug matches one of the target slugs
-            if ( $parent_category && !is_wp_error($parent_category) && in_array( $parent_category->slug, $parent_slugs ) ) {
-                // Add this category to the filtered categories
-                $filtered_categories[] = $category->name;
-            }
-        }
-    }
-
-    return $filtered_categories; // Return an array of filtered category names
-}
 
 ?>
 <div class="bsc__checkout--review" >
@@ -143,6 +116,15 @@ document.getElementById('apply_coupon').addEventListener('click', function() {
     // WooCommerce applies coupons via AJAX, trigger the click event on WooCommerce's apply coupon button.
     jQuery('form.woocommerce-checkout').find('button[name="apply_coupon"]').click();
 });
+</script>
+
+<script>
+
+
+
+
+
+
 </script>
 
 
