@@ -630,3 +630,14 @@ h1 {
         max-width: 120px;
     }
 }
+
+
+.woofc-count span {
+    background-color: var(--color--pink) !important;
+    color: var(--color--black) !important;
+}
+
+
+.woocommerce-form-login-toggle{
+    display: none !important;
+}
