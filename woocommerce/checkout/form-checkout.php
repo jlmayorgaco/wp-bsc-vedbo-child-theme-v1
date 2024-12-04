@@ -45,29 +45,40 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 					</div>
 
 					<div class="checkout__contact">
-						<div class="contact__head">
-							<h2 class="checkout__title">Contacto</h2>
-							<a class="checkout__link" hrer="">Iniciar Sesión</a>
-						</div>
+					<div class="contact__head">
+						<h2 class="checkout__title">Contacto</h2>
+						<?php if (!is_user_logged_in()) : ?>
+							<a class="checkout__link" href="<?php echo esc_url(wp_login_url()); ?>">Iniciar Sesión</a>
+						<?php endif; ?>
+					</div>
 						<div class="contact__form">
 							<div class="form__field">
 
 								<!-- ---------------------------- -->
 								<!-- BILLING_FORM::EMAIL -------- -->
 								<!-- ---------------------------- -->
-								<p class="form-row form-row-wide validate-required validate-email" id="billing_email_field" data-priority="110">
-									<span class="woocommerce-input-wrapper">
-										<input type="email" required class="input-text" 
-										name="billing_email" id="billing_email" 
-										placeholder="Correo electrónico" value="" 
-										autocomplete="email username">
-									</span>
-								</p>
+								<!-- WooCommerce's Billing Email Field -->
+								<?php 
+									woocommerce_form_field(
+										'billing_email',
+										[
+											'type'        => 'email',
+											'label'       => '',
+											'placeholder' => 'Correo electrónico',
+											'required'    => true,
+											'class'       => ['form-row-wide', 'validate-required', 'validate-email'],
+											'autocomplete'=> 'email username',
+										],
+										WC()->checkout->get_value('billing_email')
+									); 
+            					?>
 							</div>
 						</div>
 						<div class="contact__footer">
-							<input class="field__notify" name="notify" type="checkbox">
-							<label>Enviarme novedades y ofertas por correo electrónico<label>
+						<label class="form-row-wide">
+							<input class="field__notify" name="notify" type="checkbox" value="yes" <?php checked(WC()->checkout->get_value('notify'), 'yes'); ?>>
+							Enviarme novedades y ofertas por correo electrónico
+						</label>
 						</div>
 					</div>
 
@@ -87,7 +98,10 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 		
 		<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
 		
-		<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
+		
+		<h3 id="order_review_heading" style="display:none">
+			<?php esc_html_e( 'Your order', 'woocommerce' ); ?>
+		</h3>
 		
 		<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
 
