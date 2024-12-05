@@ -90,15 +90,15 @@ defined( 'ABSPATH' ) || exit;
 		<div class="review__summary">
 			<div class="summary__row">
 				<div class="summary_col col1">Subtotal (<?php echo $n_size; ?> items)</div>
-				<div class="summary_col col2"><?php echo wc_price($cart_subtotal); ?></div>
+				<div class="summary_col col2" id="review__summary--subtotal"><?php echo wc_price($cart_subtotal); ?></div>
 			</div>
 			<div class="summary__row">
 				<div class="summary_col col1">Envío</div>
-				<div class="summary_col col2"><?php echo WC()->cart->get_cart_shipping_total(); ?></div>
+				<div class="summary_col col2" id="review__summary--shipping"><?php echo WC()->cart->get_cart_shipping_total(); ?></div>
 			</div>
 			<div class="summary__row">
 				<div class="summary_col col1"> <strong> Total </strong> </div>
-				<div class="summary_col col2">
+				<div class="summary_col col2" id="review__summary--total">
 					<strong>
 						<?php 
 							$cart_total = $cart_subtotal + WC()->cart->get_shipping_total(); 
