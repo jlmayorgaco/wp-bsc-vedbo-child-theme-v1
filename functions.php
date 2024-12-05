@@ -3,8 +3,10 @@
 require_once get_stylesheet_directory() . '/inc/enqueue.php';
 
 // WooCommerce customizations
-require_once get_stylesheet_directory() . '/inc/checkout.php';
 require_once get_stylesheet_directory() . '/inc/custom-fields.php';
+require_once get_stylesheet_directory() . '/inc/custom-texts.php';
+require_once get_stylesheet_directory() . '/inc/checkout.php';
+
 
 // AJAX handlers
 require_once get_stylesheet_directory() . '/inc/ajax-handlers.php';
@@ -16,3 +18,4 @@ require_once get_stylesheet_directory() . '/inc/helpers.php';
 foreach (glob(get_stylesheet_directory() . '/inc/services/*.php') as $service_file) {
     require_once $service_file;
 }
+
