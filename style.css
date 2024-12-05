@@ -540,13 +540,29 @@ body.woocommerce-checkout{
 .review__coupon .coupon__button {
     background-color: var(--color--black);
     color: white;
-    padding: 10px 20px;
-    border: none;
+    padding: 10px 20px !important;
+    border: 2px solid var(--color--black);;
+    border-radius: 30px 30px 30px 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .review__coupon .coupon__button:hover {
     background-color: var(--color--primary);
+}
+ .coupon__button.inverse {
+    background-color: white;
+    color: var(--color--black);
+    border-color: white;
+    border: 2px solid white;
+    border-radius: 30px 30px 30px 30px;
+    
+}
+.coupon__button.inverse:hover {
+    background-color: var(--color--primary);
+    color: var(--color--black);
+    border-color: white;
+    border: 2px solid white;
 }
 
 .review__summary{}
@@ -594,9 +610,11 @@ body.woocommerce-checkout{
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+    margin-bottom: 25px;
 }
 .bsc__woocommerce_order_button_html button{
-    padding: 1.25rem 2.25rem !important;
+    padding: 10px 20px;
+    max-width: 160px;
 }
 
 /****************************************************************/
@@ -626,8 +644,8 @@ h1 {
 
 @media (min-width: 1500px) {
     .elementor-291 .elementor-element.elementor-element-6da5db0 .kitify-logo__link {
-        width: 100%;
-        max-width: 120px;
+        width: 100% !important;
+        max-width: 120px  !important;
     }
 }
 
