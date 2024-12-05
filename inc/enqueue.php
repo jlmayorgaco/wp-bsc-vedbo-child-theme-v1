@@ -33,6 +33,30 @@ function vedbo_enqueue_assets() {
             ]
         );
     }
+
+    if (is_checkout()) { // Only enqueue on checkout page
+        wp_enqueue_script(
+            'ajax-apply-coupon',
+            get_stylesheet_directory_uri() . '/js/ajax-apply-coupon.js', // Update path as necessary
+            ['jquery'],
+            '1.0.0',
+            true
+        );
+
+        wp_localize_script(
+            'ajax-apply-coupon',
+            'ajax_coupon_var',
+            [
+                'url'    => admin_url('admin-ajax.php'),
+                'nonce'  => wp_create_nonce('apply-coupon-nonce'),
+            ]
+        );
+    }
+
+
+    
 }
 add_action('wp_enqueue_scripts', 'vedbo_enqueue_assets');
-;
+
+
+
