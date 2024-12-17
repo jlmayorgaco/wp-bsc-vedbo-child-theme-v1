@@ -395,6 +395,19 @@ body.woocommerce-checkout{
 }
 .col_total{}
 
+.quantity-btn, .delete-btn{
+    padding: 0.5em 1em !important;
+    margin-right: 10px;
+}
+
+.row.row_action_buttons{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content:flex-end;
+    align-items: center;
+}
+
 .item__picture {
     display: block;
     position: relative;

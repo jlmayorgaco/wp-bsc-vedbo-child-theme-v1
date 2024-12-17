@@ -6,6 +6,7 @@ require_once get_stylesheet_directory() . '/inc/enqueue.php';
 require_once get_stylesheet_directory() . '/inc/custom-fields.php';
 require_once get_stylesheet_directory() . '/inc/custom-texts.php';
 require_once get_stylesheet_directory() . '/inc/checkout.php';
+require_once get_stylesheet_directory() . '/inc/cart.php';
 
 
 // AJAX handlers

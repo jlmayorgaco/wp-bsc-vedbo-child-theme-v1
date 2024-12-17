@@ -53,6 +53,14 @@ function vedbo_enqueue_assets() {
         );
     }
 
+    if(is_checkout()){
+        wp_enqueue_script('ajax-cart', get_stylesheet_directory_uri() . '/js/ajax-cart.js', ['jquery'], '1.0', true);
+        wp_localize_script('ajax-cart', 'wc_add_to_cart_params', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('update-cart'),
+        ]); 
+    }
+
 
     
 }
