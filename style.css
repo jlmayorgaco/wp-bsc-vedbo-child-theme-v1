@@ -12,10 +12,10 @@ Version: 1.0.1
 /*************** ADD YOUR CUSTOM CSS IN THIS AREA ***************/
 /****************************************************************/
 :root{
+    --color--white: #ffffff;
     --color--blue: #c2e9f3;
     --color--pink: #f7c0cd;
     --color--black: #333333;
-
     --size-max-w: 1333px;
 }
 
