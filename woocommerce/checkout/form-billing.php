@@ -25,8 +25,8 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php else : ?>
 
-		<h3>
-			<?php esc_html_e( 'Entrega', 'woocommerce' ); ?>
+		<h3 style="text-transform: initial;"> 
+			<?php esc_html_e( 'Datos de Entrega', 'woocommerce' ); ?>
 		</h3>
 
 	<?php endif; ?>
