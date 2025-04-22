@@ -62,7 +62,7 @@ defined( 'ABSPATH' ) || exit;
 							<div class="row row_action_buttons">
 									<button class="quantity-btn decrease">-</button>
 									<button class="quantity-btn increase">+</button>
-									<button class="delete-btn" >🗑</button>
+									<button class="delete-btn" >x</button>
 							</div>
 						</div>
 					</li>
@@ -77,37 +77,44 @@ defined( 'ABSPATH' ) || exit;
 					<label id="coupon_label" for="coupon_code">¿Tienes un código de <strong>descuento</strong>?</label>
 				</div>
 				<div class="coupon__row">
-					<div class="coupon__col">
-						<p class="coupon__message">¡Muestras <strong>gratis</strong> con todos tus pedidos en BSC! <img src=""> <img src=""> <img src=""></p>
-					</div>
+					<div class="coupon__col" style="justify-content: flex-start;">
+						<p class="coupon__message">¡Muestras <strong>gratis</strong> con todos tus pedidos en BSC! 
+						<img width="50px" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/images/corazonesBSC.png' ); ?>">
+
+					</p>
 					<div class="coupon__col">
 						<button class="coupon__button" id="apply_coupon">¡Aplicar!</button>
 					</div>
+					</div>
+					
 				</div>
 
-				<?php if ( ! empty( WC()->cart->get_applied_coupons() ) ) : ?>
+				<!-- Applied Coupons Section (Initially Hidden) -->
+				<div class="applied-coupons" 
+					<?php if ( empty( WC()->cart->get_applied_coupons() ) ) : ?> 
+						style="display: none; margin-top: 0px;" 
+					<?php endif; ?>
+				>
+
 					<!-- Applied Coupons Section -->
 					<br>
 					<hr>
 					<br>
 
-					<div class="applied-coupons" style="margin-top: 0px;">
-						<h4>Cupones aplicados:</h4>
-						<ul id="applied_coupons_list">
-							<?php foreach ( WC()->cart->get_coupons() as $coupon_code => $coupon ) : ?>
-								<li class="applied-coupon-item" data-coupon="<?php echo esc_attr( $coupon_code ); ?>">
-									<?php echo esc_html( $coupon_code ); ?> 
-									<span class="remove-coupon" style="cursor: pointer; margin-left: 10px; color: red;">X</span>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-					</div>
-				<?php endif; ?>
+					<h4>Cupones aplicados:</h4>
+					<ul id="applied_coupons_list">
+						<?php foreach ( WC()->cart->get_coupons() as $coupon_code => $coupon ) : ?>
+							<li class="applied-coupon-item" data-coupon="<?php echo esc_attr( $coupon_code ); ?>">
+								<?php echo esc_html( $coupon_code ); ?> 
+								<span class="remove-coupon" style="cursor: pointer; margin-left: 10px; color: red;">X</span>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+
     </div>
 </div>
 
-
-		<br>
 		<hr>
 		<br>
 
