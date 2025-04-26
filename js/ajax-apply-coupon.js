@@ -36,9 +36,13 @@ jQuery(document).ready(function ($) {
 
                     alert('Coupon aplicado exitosamente!');
 
+                    console.log(' TWICE :: CANT STOP ME ! ');
+                    console.log(response.data)
+                    
                     // Refresh totals
-                    $('#review__summary--subtotal').html(response.data.subtotal);
-                    $('#review__summary--shipping').html(response.data.shipping_total);
+                    $('#review__summary--subtotal').html(response.data.cart_subtotal);
+                    $('#review__summary--subtotal-discounted').html(response.data.cart_subtotal_with_discounts);
+                    $('#review__summary--shipping').html(response.data.cart_shipping_total);
                     $('#review__summary--total').html('<strong>' + response.data.cart_total + '</strong>');
 
                     // Refresh applied coupon list
@@ -66,7 +70,7 @@ jQuery(document).ready(function ($) {
             url: ajax_coupon_var.url, // AJAX endpoint
             type: 'POST',
             dataType: 'json',
-            data: {
+            data: { 
                 action: 'get_applied_coupons',
                 nonce: ajax_coupon_var.nonce, // Security nonce
             },
@@ -75,10 +79,13 @@ jQuery(document).ready(function ($) {
                     appliedCouponsSection.show(); // Show the section
     
                     response.data.coupons.forEach(function (coupon) {
+                        const couponBgImage =  window.location.origin + '/wp-content/themes/vedbo-child/images/2BONO.png';
                         const couponItem = `
+                            
                             <li class="applied-coupon-item" data-coupon="${coupon.code}">
-                                <strong>${coupon.code}</strong>
-                                <span class="remove-coupon" style="  cursor: pointer; margin-left: 10px;">X</span>
+                                <img src="${couponBgImage}" alt="Coupon Icon" class="coupon-icon" />    
+                                <strong class="coupon-code" >${coupon.code}</strong>
+                                <label class="remove-coupon" ><span>X</span></label>
                             </li>`;
                         couponListContainer.append(couponItem);
                     });

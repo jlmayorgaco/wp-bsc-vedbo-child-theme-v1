@@ -59,13 +59,30 @@ function apply_coupon_via_ajax() {
         return;
     }
 
-    WC()->cart->calculate_totals();
+    WC()->cart->calculate_totals(); // Ensure the totals are up-to-date
+
+    $cart_total = WC()->cart->get_total(); // Total including taxes and shipping
+    $cart_subtotal = WC()->cart->get_subtotal();// Subtotal BEFORE tax and shipping
+    $cart_discount_total = WC()->cart->get_discount_total(); // Total discount from coupons
+    $cart_shipping_total = WC()->cart->get_cart_shipping_total(); // Shipping cost
+    $cart_coupons_list = WC()->cart->get_applied_coupons(); // Array of applied coupon codes
+    
+    // Subtotal including discounts but before tax and shipping
+    $cart_subtotal_with_discounts = $cart_subtotal - $cart_discount_total;
 
     $response = [
-        'subtotal' => WC()->cart->get_cart_subtotal(),
-        'shipping_total' => WC()->cart->get_cart_shipping_total(),
-        'cart_total' => WC()->cart->get_total(),
-        'coupons' => get_applied_coupons_list(),
+
+        'cart_total' => $cart_total,
+        'cart_subtotal' => wc_price($cart_subtotal),
+        'cart_shipping_total' => $cart_shipping_total,
+        'cart_discount_total' => $cart_discount_total,
+        'cart_subtotal_with_discounts' => wc_price($cart_subtotal_with_discounts),
+    
+        'coupons' => $cart_coupons_list ,
+        'coupon_code' => $coupon_code,
+        'coupon_description' => (new WC_Coupon($coupon_code))->get_description(),
+        'coupon_amount' => wc_price((new WC_Coupon($coupon_code))->get_amount()),
+        'coupon_debuff' => wc_price(WC()->cart->get_cart_discount_total())
     ];
 
     wp_send_json_success($response);
@@ -295,7 +312,7 @@ function get_cart_items_html() {
                     <div class="row row_action_buttons">
                         <button class="quantity-btn decrease">-</button>
                         <button class="quantity-btn increase">+</button>
-                        <button class="delete-btn">🗑</button>
+                        <button class="delete-btn">X</button>
                     </div>
                 </div>
             </li>
