@@ -101,11 +101,12 @@ defined( 'ABSPATH' ) || exit;
 					<hr>
 					<br>
 
-					<h4>Cupones aplicados:</h4>
+					<h4>Cupones aplicados ***:</h4>
 					<ul id="applied_coupons_list">
 						<?php foreach ( WC()->cart->get_coupons() as $coupon_code => $coupon ) : ?>
 							<li class="applied-coupon-item" data-coupon="<?php echo esc_attr( $coupon_code ); ?>">
 								<?php echo esc_html( $coupon_code ); ?> 
+								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/images/2BONO.png' ); ?>" >	
 								<span class="remove-coupon" style="cursor: pointer; margin-left: 10px; color: red;">X</span>
 							</li>
 						<?php endforeach; ?>
@@ -209,15 +210,46 @@ document.getElementById('apply_coupon').addEventListener('click', function() {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 5px 0;
-    padding: 5px 10px;
-    background-color: #f7f7f7;
-    border: 1px solid #ddd;
+    margin: 0px 0;
+    padding: 0px 0px;
+    background-color: transparent;
+    border: 1px solid transparent;
     border-radius: 4px;
 
 	text-transform: uppercase;
-}
 
+	position: relative;
+
+	width:440px;
+	height: 140px;
+
+}
+.applied-coupon-item img{ position: absolute; 
+	display:block;
+	width:440px;
+	header: 140px;
+}
+.applied-coupon-item label{ 
+	position:absolute;
+    cursor: pointer;
+    margin-left: 10px;
+    top: 5px;
+    right: 10px;
+    background-color: pink;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+.appplied-coupon-item label span{ 
+	position: relative;
+    left: 6px;
+    top: -3px;
+}
+.applied-coupon-item strong{ 
+	position: absolute;
+	bottom: 20px;
+    left: 24px;
+}
 .remove-coupon {
     color: #333333;
     font-weight: bold;
