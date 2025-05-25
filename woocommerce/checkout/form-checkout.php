@@ -37,14 +37,14 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 			<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-			<div class="col2-set" id="customer_details">
+			<div class="col2-set" id="customer_details" >
 				<div class="col-1">
 
 					<div class="bsc__checkout__header">
 						<img src="<?php echo get_template_directory_uri().'-child/images/BSC_Checkout_Logo.png'; ?>">
 					</div>
 
-					<div class="checkout__contact">
+					<div class="checkout__contact" style="display:none">
 					<div class="contact__head">
 						<h2 class="checkout__title">Contacto</h2>
 						<?php if (!is_user_logged_in()) : ?>
