@@ -84,7 +84,7 @@ body.woocommerce-checkout{
     font-family: inherit;
     font-size: 0.875rem;
     font-weight: bold;
-    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-bottom: 1rem;
 }
 
@@ -395,10 +395,59 @@ body.woocommerce-checkout{
 }
 .col_total{}
 
+
+
 .quantity-btn, .delete-btn{
     padding: 0.5em 1em !important;
     margin-right: 10px;
 }
+
+
+
+
+
+.quantity-btn.decrease{
+    background-color: white  !important;
+    color: black !important;
+    cursor: pointer;
+
+    font-size: 17px;
+    padding: 0px 10px 0px 12px !important;
+}
+.quantity-btn.increase{
+    background-color: white  !important;
+    color: black !important;
+    cursor: pointer;
+
+    font-size: 14px;
+    padding: 1px 10px 2px 12px !important;
+
+}
+.delete-btn{
+    background-color: white  !important;
+    color: black !important;
+    cursor: pointer;
+    text-transform: lowercase;
+
+    font-size: 13px !important;
+    padding: 1px 10px 2px 12px !important;
+
+}
+
+.quantity-btn.decrease:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.quantity-btn.increase:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.delete-btn:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+
 
 .row.row_action_buttons{
     display: flex;
@@ -549,20 +598,37 @@ body.woocommerce-checkout{
 .review__coupon .coupon__message {
     font-size: 0.9em;
     color: #333;
+    width: 250px;
 }
 .review__coupon .coupon__button {
     background-color: var(--color--black);
     color: white;
-    padding: 10px 20px !important;
+    padding: 12px 24px !important;
     border: 2px solid var(--color--black);;
     border-radius: 30px 30px 30px 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
+    font-family: "Helvetica", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #FFFFFF;
+    border-color: #02010100;
+
+    box-sizing: content-box;
+    padding: 10px 18px !important;
+    height: 18px;
+    display: block;
+    font-size: 15px;
 }
 
 .review__coupon .coupon__button:hover {
-    background-color: var(--color--primary);
+    background-color: white;
+    color: var(--color--black);
 }
+
+
  .coupon__button.inverse {
     background-color: white;
     color: var(--color--black);
@@ -578,7 +644,11 @@ body.woocommerce-checkout{
     border: 2px solid white;
 }
 
-.review__summary{}
+.review__summary{
+    color:var(--color--black);
+    font-family: "Helvetica", sans-serif;
+    font-size: 14.5px
+}
 .review__summary .summary__row {
     display: flex;
     flex-direction: row;
@@ -624,10 +694,39 @@ body.woocommerce-checkout{
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 25px;
+
 }
 .bsc__woocommerce_order_button_html button{
     padding: 10px 20px;
     max-width: 160px;
+
+   
+    padding: 12px 24px !important;
+    border: 0px solid var(--color--black) !important;
+    border-radius: 30px 30px 30px 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Helvetica", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #FFFFFF;
+    box-sizing: content-box;
+    padding: 10px 18px !important;
+    height: 18px;
+    display: block;
+    font-size: 15px;
+
+   
+    background-color: var(--color--black) !important;
+    color: white  !important;
+    
+}
+
+.bsc__woocommerce_order_button_html button:hover{
+    
+    background-color: white  !important;
+    color: var(--color--black)  !important;
 }
 
 /****************************************************************/
@@ -671,4 +770,73 @@ h1 {
 
 .woocommerce-form-login-toggle{
     display: none !important;
+}
+
+
+.wc_payment_methods.payment_methods.methods{
+    color: var(--color--black);
+}
+
+body.woocommerce-checkout .woocommerce .woocommerce-checkout-payment .payment_methods .wc_payment_method {
+
+    border-color: var(--color--black) !important;
+}
+
+
+label[for="payment_method_wompi_wwp"]{
+    font-weight: 900 !important;
+}
+
+.payment_box.payment_method_wompi_wwp{
+    padding-top: 0em !important;
+}
+.wc_payment_method.payment_method_wompi_wwp{
+    padding-bottom: 0em !important;
+}
+
+.woocommerce-privacy-policy-text{
+    margin-top: 0px !important;
+    color: var(--color--black);
+    width: 100% !important;
+    padding-right: 0% !important;
+}
+
+.woocommerce-terms-and-conditions-checkbox-text{
+color: var(--color--black) !important;
+font-family: "Helvetica", sans-serif !important;
+font-size: 14.5px !important;
+}
+
+.woocommerce-terms-and-conditions-link{
+    font-weight: 900 !important;
+    font-size: 12.5px !important;
+}
+.woocommerce-terms-and-conditions-link {
+    text-transform: capitalize;
+    border-bottom: 1px solid !important;
+    display: inline-block;
+}
+
+
+
+
+/* Gradient background for checkout-bubbles page */
+.checkout-bubbles-bg {
+    background: linear-gradient(to right, white calc(50% + 20px), var(--color--pink) calc(50% - 20px));
+}
+
+/* Mobile override: Full white background */
+@media screen and (max-width: 768px) {
+    .checkout-bubbles-bg {
+        background: white !important;
+    }
+}
+
+
+
+
+
+select:disabled {
+    background-color: #cbcbcb !important;
+    cursor: not-allowed;
 }
