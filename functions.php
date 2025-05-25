@@ -35,3 +35,38 @@ function load_coming_soon_template() {
 
 // Hook into template_redirect to override the front-end
 add_action('template_redirect', 'load_coming_soon_template');
+
+function add_custom_body_class($classes) {
+    if (is_page('checkout-bubbles') && trim($_SERVER['REQUEST_URI'], '/') === 'checkout-bubbles') {
+        $classes[] = 'checkout-bubbles-bg';
+    }
+    return $classes;
+}
+add_filter('body_class', 'add_custom_body_class');
+
+
+
+add_filter('woocommerce_package_rates', 'custom_free_shipping_for_high_value_orders', 10, 2);
+
+function custom_free_shipping_for_high_value_orders($rates, $package) {
+    $free_shipping_minimum = 300000; // Minimum cart amount for free shipping
+
+    // Get cart subtotal before taxes and shipping
+    $cart_subtotal = WC()->cart->get_subtotal();
+
+    // Debug output to check subtotal (optional)
+    error_log("Cart subtotal: " . $cart_subtotal);
+
+    if ($cart_subtotal >= $free_shipping_minimum) {
+        // Keep only the free shipping method and remove all others
+        foreach ($rates as $rate_id => $rate) {
+            if (is_object($rate) && method_exists($rate, 'get_method_id')) {
+                if ($rate->get_method_id() !== 'free_shipping') {
+                    unset($rates[$rate_id]);
+                }
+            }
+        }
+    }
+
+    return $rates;
+}
