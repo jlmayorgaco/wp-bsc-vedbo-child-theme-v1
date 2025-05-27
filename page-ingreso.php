@@ -142,7 +142,7 @@ $login_error = isset($_GET['login']) && $_GET['login'] === 'failed';
 
 .form__error-msg {
   color: #d32f2f;
-  font-size: 13px;
+  font-size: 17px;
   margin-top: 5px;
   display: none;
   text-align: center;
@@ -150,15 +150,21 @@ $login_error = isset($_GET['login']) && $_GET['login'] === 'failed';
 
 .form__links {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .form__link {
-  color: #3f51b5;
+  color:rgb(97, 97, 97);
   text-decoration: underline;
-  font-size: 0.95rem;
+  font-style: italic;
+  font-size: 14px;
+    letter-spacing: 2px;
 }
 
+.form__link:hover {
+  font-weight: bold;
+    color:rgb(97, 97, 97);
+}
 .form__field--remember-me {
   display: flex;
   width: 100%;
@@ -174,6 +180,11 @@ $login_error = isset($_GET['login']) && $_GET['login'] === 'failed';
   align-items: center;
   margin: 0 auto;
   padding: 10px 30px !important;
+  font-size: 17px !important;
+}
+.form__field--submit input:hover {
+  color: var(--color--black) !important;
+  background-color:var(--color--pink)
 }
 </style>
 
@@ -219,7 +230,7 @@ $login_error = isset($_GET['login']) && $_GET['login'] === 'failed';
           </div>
 
           <div class="form__field form__field--submit">
-            <input type="submit" name="wp-submit" id="wp-submit" style="padding: 10px 30px" class="form__submit btn btn--primary" value="¡ Iniciar sesión !" />
+            <input type="submit" name="wp-submit" id="wp-submit" style="padding: 10px 30px; font-size:17px;" class="form__submit btn btn--primary" value="¡ Iniciar sesión !" />
             <input type="hidden" name="redirect_to" value="<?php echo esc_url(home_url('/mi-cuenta/')); ?>" />
           </div>
 
