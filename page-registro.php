@@ -159,11 +159,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
   cursor: pointer;
   font-weight: bold;
   font-size: 1rem;
+
 }
 
-.form__submit:hover {
-  background-color: #00796b;
+.form__submit input{
+  width: fit-content;
+
 }
+
+
 
 .form__error-msg {
   color: #d32f2f;
@@ -172,12 +176,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
   display: none;
   text-align: center;
 }
+
+.form__field--submit{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 42px;
+}
+.form__field--submit input{
+  width: fit-content;
+   font-size: 17px !important;
+}
+
+
+.form__field--submit input:hover {
+  color: var(--color--black) !important;
+  background-color:var(--color--pink)
+}
 </style>
 
 <main class="login">
   <div class="login__container">
     <div class="login__image">
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/SIGNIN_COVER_BG.png" alt="Imagen de fondo de registro" />
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/SIGNUP_COVER_BG.png" alt="Imagen de fondo de registro" />
     </div>
 
     <div class="login__form">
@@ -215,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email'])) {
           </div>
 
           <div class="form__field form__field--submit">
-            <input type="submit" id="register-submit" class="form__submit" value="¡Unirme a Bubbles!" />
+            <input type="submit" id="register-submit" class="form__submit" value="¡Unirme a Bubbles!"  style=" font-size: 17px !important;"/>
           </div>
         </form>
       </div>
